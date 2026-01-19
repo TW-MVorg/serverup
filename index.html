@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元界創想 | 2026 伺服器遷移企劃</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --line: #000000;
+            --sub-text: #555555;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 30px;
+            border: 3px solid var(--line);
+            box-sizing: border-box;
+            background: #fff;
+        }
+
+        header {
+            border-bottom: 6px solid var(--line);
+            padding-bottom: 20px;
+            margin-bottom: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        h1 { margin: 0; font-size: 2.2rem; letter-spacing: 2px; font-weight: 900; }
+        .visitor-stats { text-align: right; font-size: 11px; font-weight: bold; line-height: 1.5; }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 900;
+            background: var(--text);
+            color: var(--bg);
+            display: inline-block;
+            padding: 4px 15px;
+            margin: 25px 0 15px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            border: 2px solid var(--line);
+            padding: 20px;
+            position: relative;
+            background: #fff;
+            min-height: 250px;
+        }
+
+        /* 滑鼠感應風扇模組 */
+        .fan-unit {
+            width: 55px;
+            height: 55px;
+            border: 2px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            float: right;
+            margin-left: 10px;
+        }
+        .fan-blades {
+            width: 80%;
+            height: 80%;
+            position: relative;
+            animation: spin linear infinite;
+        }
+        .blade {
+            position: absolute;
+            width: 50%;
+            height: 20%;
+            background: var(--text);
+            top: 40%;
+            left: 50%;
+            transform-origin: left center;
+            clip-path: polygon(0 50%, 100% 0, 80% 50%, 100% 100%);
+        }
+        .b1 { transform: rotate(0deg); }
+        .b2 { transform: rotate(90deg); }
+        .b3 { transform: rotate(180deg); }
+        .b4 { transform: rotate(270deg); }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* 規格內容 */
+        .label { font-size: 0.7rem; font-weight: bold; color: var(--sub-text); display: block; margin-top: 10px; }
+        .value { font-size: 1rem; font-weight: 900; margin-bottom: 10px; border-bottom: 1px solid #eee; font-family: 'Courier New', monospace; }
+
+        .task-box {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--line);
+        }
+        .task-list { padding: 0; margin: 0; list-style: none; font-size: 0.85rem; font-weight: bold; }
+        .task-list li { margin-bottom: 5px; display: flex; align-items: center; }
+        .task-list li::before { content: "▢"; margin-right: 8px; }
+
+        /* 轉移路線 */
+        .route-container {
+            border: 2px solid var(--line);
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-weight: 900;
+        }
+        .target-tag { background: var(--text); color: var(--bg); padding: 5px 20px; }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: bold;
+            border-top: 1px solid #000;
+            padding-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .route-container { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body onload="detect()">
+
+<div class="container">
+    <header>
+        <div>
+            <h1>元界創想 | 2026</h1>
+            <p style="margin:5px 0 0 0; font-size: 12px; font-weight: bold;">伺服器遷移及硬體升級工程</p>
+        </div>
+        <div class="visitor-stats">
+            作業系統：<span id="sys-os">偵測中</span><br>
+            裝置類型：<span id="sys-dev">偵測中</span>
+        </div>
+    </header>
+
+    <div class="section-title">◈ 硬體規格與升級項目</div>
+    
+    <div class="grid">
+        <div class="card" id="card-go">
+            <div class="fan-unit">
+                <div id="f-go" class="fan-blades" style="animation-duration: 2s;">
+                    <div class="blade b1"></div><div class="blade b2"></div>
+                    <div class="blade b3"></div><div class="blade b4"></div>
+                </div>
+            </div>
+            <h2 style="margin:0 0 10px 0;">[ GO 伺服器 ]</h2>
+            
+            <span class="label">處理器</span>
+            <div class="value">Intel Core i7-4470</div>
+            
+            <span class="label">記憶體 / 儲存</span>
+            <div class="value">16GB RAM / 125GB SSD</div>
+
+            <div class="task-box">
+                <ul class="task-list">
+                    <li style="color:#666">■ 轉移任務</li>
+                    <li>散熱器全面升級 (含散熱膏)</li>
+                    <li>機殼物理結構更換</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" id="card-pro">
+            <div class="fan-unit">
+                <div id="f-pro" class="fan-blades" style="animation-duration: 2s;">
+                    <div class="blade b1"></div><div class="blade b2"></div>
+                    <div class="blade b3"></div><div class="blade b4"></div>
+                </div>
+            </div>
+            <h2 style="margin:0 0 10px 0;">[ PRO 伺服器 ]</h2>
+            
+            <span class="label">處理器</span>
+            <div class="value">Intel Core i7-14700</div>
+            
+            <span class="label">規格詳情</span>
+            <div class="value">20GB RAM / 8+2G GPU / 512G+1.5T</div>
+
+            <div class="task-box">
+                <ul class="task-list">
+                    <li style="color:#666">■ 轉移任務</li>
+                    <li>散熱器全面升級 (含散熱膏)</li>
+                    <li>CPU 固定座強化 (ILM 扣具)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">◈ 環境空間轉移路線</div>
+    <div class="route-container">
+        <div>舊位置：桌面下 (暫時固定)</div>
+        <div style="font-size:1.5rem">➔</div>
+        <div class="target-tag">新位置：伺服器專用鐵架</div>
+    </div>
+
+    <footer>
+        &copy; 2026 元界創想 - 系統工程部
+    </footer>
+</div>
+
+<script>
+    function detect() {
+        const ua = navigator.userAgent;
+        document.getElementById('sys-os').innerText = ua.indexOf("Win")!=-1?"WINDOWS":ua.indexOf("Mac")!=-1?"MACOS":"MOBILE";
+        document.getElementById('sys-dev').innerText = /Mobi|Android/i.test(ua)?"行動裝置":"工作站電腦";
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        ['go', 'pro'].forEach(id => {
+            const card = document.getElementById('card-' + id);
+            const fan = document.getElementById('f-' + id);
+            if(!card || !fan) return;
+
+            const rect = card.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY);
+            
+            let speed = (dist / 250).toFixed(2);
+            speed = Math.max(0.08, Math.min(2.5, parseFloat(speed)));
+            fan.style.animationDuration = speed + 's';
+        });
+    });
+</script>
+
+</body>
+</html>
+
